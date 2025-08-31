@@ -1,7 +1,4 @@
 # Delete the book
+book = Book.objects.get(title="Nineteen Eighty-Four")
 book.delete()
-
-# Confirm deletion
-books_after_delete = Book.objects.all()
-print(books_after_delete)
-# Expected output: <QuerySet []>
+print(Book.objects.all())
