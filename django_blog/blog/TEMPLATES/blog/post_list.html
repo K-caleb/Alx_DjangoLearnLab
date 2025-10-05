@@ -1,0 +1,45 @@
+{% extends "blog/base.html" %}
+{% block title %}All Blog Posts{% endblock %}
+
+{% block content %}
+    <h2>Blog Posts</h2>
+    {% if user.is_authenticated %}
+        <p><a href="{% url 'post-create' %}" class="btn btn-primary">Create New Post</a></p>
+    {% else %}
+        <p>Please <a href="{% url 'login' %}">log in</a> to create a new post.</p>
+    {% endif %}
+
+    {% for post in posts %}
+        <article class="post">
+            <h2><a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a></h2>
+            <p class="post-meta">
+                By {{ post.author.username }} on {{ post.published_date|date:"F d, Y" }}
+            </p>
+            <div class="post-content-snippet">{{ post.content|truncatewords:30 }}</div>
+            <a href="{% url 'post-detail' post.pk %}">Read More &raquo;</a>
+        </article>
+        <hr>
+    {% empty %}
+        <p>No posts found.</p>
+    {% endfor %}
+{% endblock content %}
+
+% extends "blog/base.html" %} {% block title %} {% if tag_filter %}Posts Tagged: {{ tag_filter }}{% else %}All Blog Posts{% endif %} {% endblock %} {% block content %}
+Blog Posts {% if tag_filter %} » Tag: #{{ tag_filter }} (Clear Filter) {% endif %}
+{% if user.is_authenticated %}
+Create New Post
+
+{% else %}
+Please log in to create a new post.
+
+{% endif %} {% for post in posts %}
+{{ post.title }}
+By {{ post.author.username }} on {{ post.published_date|date:"F d, Y" }}
+
+{% for tag in post.tags.all %} #{{ tag.name }} {% endfor %}
+{{ post.content|truncatewords:30 }}
+Read More »
+{% empty %}
+No posts found.
+
+{% endfor %} {% endblock content %}

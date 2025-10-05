@@ -1,0 +1,23 @@
+{% extends "blog/base.html" %}
+{% block title %}Profile Management{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <h2>Welcome, {{ user.username }}!</h2>
+    
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <h3>Update Profile Details</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }} 
+        <button type="submit">Save Changes</button>
+    </form>
+</div>
+{% endblock content %}
