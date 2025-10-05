@@ -80,5 +80,7 @@ urlpatterns = [
 ]
 
 ["comment/<int:pk>/update/", "post/<int:pk>/comments/new/"]
+["tags/<slug:tag_slug>/", "PostByTagListView.as_view()"]
+
 
 
