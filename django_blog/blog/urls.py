@@ -79,3 +79,6 @@ urlpatterns = [
     path('comment/<int:pk>/delete/', CommentDeleteView.as_view(), name='comment-delete'),
 ]
 
+["comment/<int:pk>/update/", "post/<int:pk>/comments/new/"]
+
+
