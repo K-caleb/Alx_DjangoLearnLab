@@ -140,3 +140,4 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return self.request.user == comment.author
 
 ["CommentCreateView"]
+["Post.objects.filter", "title__icontains", "tags__name__icontains", "content__icontains"]
